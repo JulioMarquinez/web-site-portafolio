@@ -1,5 +1,7 @@
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
+import Hero from './components/sections/Hero';
+import About from './components/sections/About';
 
 
 function App() {
@@ -10,16 +12,8 @@ function App() {
       <Navbar />
       <main className="w-full lg:h-screen lg:overflow-y-scroll lg:snap-y lg:snap-mandatory scroll-smooth no-scrollbar">
         
-        {/* SECCIÓN 1: INICIO */}
-        <section id="home" className="min-h-screen w-full flex items-center justify-center border-b border-white/10 snap-start pt-16">
-          <h1 className="text-4xl font-bold">Sección: Inicio</h1>
-        </section>
-
-        {/* SECCIÓN 2: SOBRE MÍ */}
-        <section id="about" className="min-h-screen w-full flex items-center justify-center bg-surface border-b border-white/10 snap-start pt-16">
-          <h1 className="text-4xl font-bold">Sección: Sobre Mí</h1>
-        </section>
-
+        <Hero />
+        <About />
         {/* SECCIÓN 3: PROYECTOS */}
         <section id="projects" className="min-h-screen w-full flex items-center justify-center border-b border-white/10 snap-start pt-16">
           <h1 className="text-4xl font-bold">Sección: Proyectos</h1>
