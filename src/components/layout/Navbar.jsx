@@ -11,7 +11,7 @@ const Navbar = () => {
   // Función para cambiar idioma
   const changeLanguage = (lang) => {
     i18n.changeLanguage(lang);
-    setIsOpen(false); // Cerrar menú en móvil al cambiar
+    setIsOpen(false);
   };
 
   const navLinks = [
