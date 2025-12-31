@@ -1,32 +1,16 @@
-// Importamos logos específicos de marcas
 import { FaJava, FaDocker, FaAws, FaReact, FaAngular, FaJenkins, FaGitAlt } from 'react-icons/fa';
 import { SiSpringboot, SiHibernate, SiMysql, SiMongodb, SiPostgresql } from 'react-icons/si';
-import backendBg from '../../assets/backend-bg.jpg';
-const About = () => {
 
+const About = () => {
   return (
     <section id="about" className="min-h-screen w-full flex items-center justify-center snap-start relative">
-      
-      {/* 1. IMAGEN DE FONDO */}
-      {/* Asegúrate de tener una imagen llamada 'backend-bg.jpg' en tu carpeta public */}
-      <div 
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat bg-fixed"
-        style={{ backgroundImage: `url(${backendBg})` }} 
-      >
-        {/* Capa oscura para asegurar legibilidad (Overlay) */}
-        <div className="absolute inset-0 bg-background/90 md:bg-background/85"></div>
-      </div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-20">
-        
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">Ingeniería Backend</h2>
           <div className="h-1 w-24 bg-blue-500 mx-auto rounded-full"></div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          
-          {/* COLUMNA IZQUIERDA: Texto Biográfico */}
           <div className="space-y-6 text-lg md:text-xl text-gray-300 leading-relaxed font-light">
             <p>
               Mi enfoque principal es el diseño y desarrollo de sistemas del lado del servidor. 
@@ -44,10 +28,7 @@ const About = () => {
             </p>
           </div>
 
-          {/* COLUMNA DERECHA: Stack Tecnológico (Solo Logos) */}
           <div className="space-y-10">
-            
-            {/* Grupo 1: Backend Core (El más destacado) */}
             <div className="bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-sm">
               <h3 className="text-sm font-bold text-blue-400 uppercase tracking-wider mb-4 border-b border-white/10 pb-2">Backend Core</h3>
               <div className="flex flex-wrap gap-6 text-4xl text-gray-300">
@@ -60,7 +41,6 @@ const About = () => {
               </div>
             </div>
 
-            {/* Grupo 2: Infra & DevOps */}
             <div className="bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-sm">
               <h3 className="text-sm font-bold text-purple-400 uppercase tracking-wider mb-4 border-b border-white/10 pb-2">Infraestructura & DevOps</h3>
               <div className="flex flex-wrap gap-6 text-4xl text-gray-300">
@@ -71,7 +51,6 @@ const About = () => {
               </div>
             </div>
 
-            {/* Grupo 3: Frontend (Más pequeño) */}
             <div className="bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-sm">
               <h3 className="text-sm font-bold text-emerald-400 uppercase tracking-wider mb-4 border-b border-white/10 pb-2">Frontend & UI</h3>
               <div className="flex flex-wrap gap-6 text-3xl text-gray-400">
@@ -79,10 +58,8 @@ const About = () => {
                 <FaAngular className="hover:text-red-600 transition-colors transform hover:scale-110" title="Angular" />
               </div>
             </div>
-
           </div>
         </div>
-
       </div>
     </section>
   );

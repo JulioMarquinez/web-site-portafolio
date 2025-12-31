@@ -3,12 +3,7 @@ import { ArrowRight, FileText } from 'lucide-react';
 const Hero = () => {
   return (
     <section id="home" className="min-h-screen w-full flex items-center justify-center border-b border-white/10 snap-start pt-16 relative overflow-hidden">
-      
-      <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:50px_50px]" />
-      <div className="absolute h-full w-full bg-background [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center relative z-10">
-        
         <div className="mb-6 inline-flex items-center px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-sm font-medium">
           <span className="flex h-2 w-2 rounded-full bg-blue-400 mr-2 animate-pulse"></span>
           Disponible para proyectos Backend
@@ -46,7 +41,6 @@ const Hero = () => {
             Descargar CV
           </a>
         </div>
-
       </div>
     </section>
   );
