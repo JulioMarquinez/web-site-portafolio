@@ -13,7 +13,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="w-full py-8 bg-background border-t border-white/10 snap-align-none">
+    <footer className="w-full py-8 bg-background border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
         
         <div className="text-gray-400 text-sm">
