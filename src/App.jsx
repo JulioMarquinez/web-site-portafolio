@@ -50,11 +50,11 @@ function App() {
       if (nextIndex !== currentIndex) {
         isAnimating = true;
         lenis.scrollTo(sections[nextIndex], {
-          duration: 1.2,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          duration: 1,
+          easing: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
           lock: true, // Propiedad nativa de Lenis que bloquea otras interacciones mientras anima
           onComplete: () => {
-            setTimeout(() => { isAnimating = false; }, 100); // Cooldown extendido
+            setTimeout(() => { isAnimating = false; }, 1); // Cooldown extendido
           }
         });
       }
