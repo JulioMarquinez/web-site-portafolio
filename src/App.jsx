@@ -14,35 +14,52 @@ function App() {
       smoothWheel: true,
     });
 
-    let scrollTimeout;
-   
-    lenis.on('scroll', () => {
-      // Limpiamos el temporizador mientras el usuario siga moviendo la rueda
-      clearTimeout(scrollTimeout);
-      
-      // Si pasan 200ms sin movimiento, asumimos que el usuario se detuvo
-      scrollTimeout = setTimeout(() => {
-        const sections = document.querySelectorAll('section');
-        let closestSection = null;
-        let minDistance = Infinity;
+    let isAnimating = false;
 
-        // Calculamos qué sección está más cerca del borde superior de la pantalla
-        sections.forEach((section) => {
-          const rect = section.getBoundingClientRect();
-          const distance = Math.abs(rect.top);
-          
-          if (distance < minDistance) {
-            minDistance = distance;
-            closestSection = section;
+    const handleWheel = (e) => {
+      e.preventDefault(); // Bloqueamos el scroll nativo para que no pelee con Lenis
+      if (isAnimating) return;
+
+      const delta = e.deltaY;
+      if (Math.abs(delta) < 15) return; // Filtramos toques fantasma del trackpad
+
+      const sections = Array.from(document.querySelectorAll('section'));
+      
+      // 1. Detectar en qué sección estamos realmente (clave por si el usuario usó el Navbar)
+      let currentIndex = 0;
+      let minDistance = Infinity;
+      sections.forEach((sec, idx) => {
+        const distance = Math.abs(sec.getBoundingClientRect().top);
+        if (distance < minDistance) {
+          minDistance = distance;
+          currentIndex = idx;
+        }
+      });
+
+      // 2. Calcular a dónde queremos ir
+      let nextIndex = currentIndex;
+      if (delta > 0 && currentIndex < sections.length - 1) {
+        nextIndex++; // Hacia abajo
+      } else if (delta < 0 && currentIndex > 0) {
+        nextIndex--; // Hacia arriba
+      }
+
+      // 3. Ejecutar el movimiento
+      if (nextIndex !== currentIndex) {
+        isAnimating = true;
+        lenis.scrollTo(sections[nextIndex], {
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          lock: true, // Propiedad nativa de Lenis que bloquea otras interacciones mientras anima
+          onComplete: () => {
+            setTimeout(() => { isAnimating = false; }, 300); // Cooldown para evitar saltos dobles
           }
         });
+      }
+    };
 
-        // Si la sección más cercana no está perfectamente centrada (margen de 10px), deslizamos hacia ella
-        if (closestSection && minDistance > 10) {
-          lenis.scrollTo(closestSection, { duration: 0.8, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-        }
-      }, 200);
-    });
+    // El listener NECESITA el parámetro { passive: false } para que preventDefault() funcione
+    window.addEventListener('wheel', handleWheel, { passive: false });
 
     function raf(time) {
       lenis.raf(time);
@@ -52,7 +69,7 @@ function App() {
     requestAnimationFrame(raf);
 
     return () => {
-      clearTimeout(scrollTimeout);
+      window.removeEventListener('wheel', handleWheel);
       lenis.destroy();
     };
   }, []);
