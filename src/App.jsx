@@ -11,7 +11,9 @@ function App() {
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
-      smoothWheel: true,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: false, // Desactiva el control nativo de la rueda
+      syncTouch: false,   // Desactiva el control nativo táctil
     });
 
     let isAnimating = false;
@@ -21,7 +23,7 @@ function App() {
       if (isAnimating) return;
 
       const delta = e.deltaY;
-      if (Math.abs(delta) < 15) return; // Filtramos toques fantasma del trackpad
+      if (Math.abs(delta) < 40) return; // Umbral más alto para ignorar la inercia residual
 
       const sections = Array.from(document.querySelectorAll('section'));
       
@@ -52,7 +54,7 @@ function App() {
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           lock: true, // Propiedad nativa de Lenis que bloquea otras interacciones mientras anima
           onComplete: () => {
-            setTimeout(() => { isAnimating = false; }, 300); // Cooldown para evitar saltos dobles
+            setTimeout(() => { isAnimating = false; }, 100); // Cooldown extendido
           }
         });
       }
