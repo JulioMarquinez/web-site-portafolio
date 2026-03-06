@@ -5,6 +5,7 @@ import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer'; 
 import Hero from './components/sections/Hero';
 import About from './components/sections/About';
+import Projects from './components/sections/Projects';
 import backgroundImage from './assets/Background-portfolio.jpg'; 
 
 function App() {
@@ -94,10 +95,7 @@ function App() {
         <main className="w-full flex-grow">
           <Hero />
           <About />
-
-          <section id="projects" className="min-h-screen w-full flex items-center justify-center border-b border-white/10 pt-16">
-            <h1 className="text-4xl font-bold">Sección: Proyectos</h1>
-          </section>
+          <Projects />
 
           <section id="contact" className="min-h-screen w-full flex flex-col justify-between pt-16">
             <div className="flex-1"></div>
