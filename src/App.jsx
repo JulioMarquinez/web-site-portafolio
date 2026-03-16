@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 import Navbar from './components/layout/Navbar';
-import Footer from './components/layout/Footer'; 
 import Hero from './components/sections/Hero';
 import About from './components/sections/About';
 import Projects from './components/sections/Projects';
+import Contact from './components/sections/Contact';
 import backgroundImage from './assets/Background-portfolio.jpg'; 
 
 function App() {
@@ -61,6 +61,29 @@ function App() {
       }
     };
 
+    // Interceptor para navegación fluida desde el Navbar
+    const handleAnchorClick = (e) => {
+      const target = e.target.closest('a[href^="#"]');
+      if (target) {
+        e.preventDefault();
+        const id = target.getAttribute('href');
+        const section = document.querySelector(id);
+        if (section) {
+          isAnimating = true;
+          lenis.scrollTo(section, {
+            duration: 1.5,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+          });
+          // Timeout estricto para liberar el scroll sin importar qué pase
+          setTimeout(() => {
+            isAnimating = false;
+          }, 1500);
+        }
+      }
+    };
+
+    document.addEventListener('click', handleAnchorClick);
+
     // El listener NECESITA el parámetro { passive: false } para que preventDefault() funcione
     window.addEventListener('wheel', handleWheel, { passive: false });
 
@@ -73,6 +96,7 @@ function App() {
 
     return () => {
       window.removeEventListener('wheel', handleWheel);
+      document.removeEventListener('click', handleAnchorClick);
       lenis.destroy();
     };
   }, []);
@@ -96,16 +120,8 @@ function App() {
           <Hero />
           <About />
           <Projects />
+          <Contact />
 
-          <section id="contact" className="min-h-screen w-full flex flex-col justify-between pt-16">
-            <div className="flex-1"></div>
-            <div className="flex-1 flex items-center justify-center">
-              <h1 className="text-4xl font-bold">Sección: Contacto</h1>
-            </div>
-            <div className="w-full">
-              <Footer />
-            </div>
-          </section>
         </main>
       </div>
     </div>

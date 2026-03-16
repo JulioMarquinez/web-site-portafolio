@@ -1,10 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X, Github, Linkedin } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const Navbar = () => {
   const { t, i18n } = useTranslation("global");
   const [isOpen, setIsOpen] = useState(false);
+
+  const [activeSection, setActiveSection] = useState('home');
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, { threshold: 0.5 }); // Detecta cuando el 50% de la sección es visible
+
+    const sections = document.querySelectorAll('section[id]');
+    sections.forEach((section) => observer.observe(section));
+
+    return () => sections.forEach((section) => observer.unobserve(section));
+  }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -41,7 +58,11 @@ const Navbar = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="hover:text-primary transition-colors duration-300 text-sm font-medium"
+                  className={`transition-colors duration-300 text-sm font-medium ${
+                    activeSection === link.href.substring(1) 
+                      ? 'text-[#0f9d58]' 
+                      : 'hover:text-primary text-gray-300'
+                  }`}
                 >
                   {link.name}
                 </a>
@@ -75,7 +96,11 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-800 hover:text-primary"
+                className={`block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-800 ${
+                  activeSection === link.href.substring(1)
+                    ? 'text-[#0f9d58]'
+                    : 'text-gray-300 hover:text-primary'
+                }`}
                 onClick={() => setIsOpen(false)}
               >
                 {link.name}

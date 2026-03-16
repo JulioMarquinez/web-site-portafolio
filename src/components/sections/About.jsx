@@ -78,7 +78,7 @@ const About = () => {
                 once={false}
               >
                 <div className="bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-sm">
-                  <h3 className={`text-sm font-bold ${card.titleClassName} uppercase tracking-wider mb-4 border-b border-white/10 pb-2`}>{card.title}</h3>
+                  <h3 className={`text-sm font-bold ${card.titleClassName} uppercase tracking-wider mb-4`}>{card.title}</h3>
                   <div className={`flex flex-wrap gap-6 ${card.iconsClassName}`}>
                     {card.icons}
                   </div>

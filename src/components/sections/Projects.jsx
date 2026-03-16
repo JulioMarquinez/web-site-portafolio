@@ -84,7 +84,7 @@ function Projects() {
         </motion.div>
       </div>
 
-      <div className="relative w-full md:w-1/2 h-[50vh] md:h-screen bg-[#0d1117] flex flex-col border-t md:border-t-0 md:border-l border-white/10 overflow-hidden">
+      <div className="relative w-full md:w-1/2 h-[50vh] md:h-screen bg-transparent flex flex-col border-t md:border-t-0 md:border-l border-white/10 overflow-hidden">
         
         {/* Fondo: Terminal de Código */}
         <div className="absolute inset-0 p-8 font-mono text-sm md:text-base text-green-400/70 opacity-50 whitespace-pre-wrap flex flex-col justify-center">
